@@ -1,5 +1,7 @@
 from cat import hook, RecallSettings
 
+from .settings import Languages
+
 
 @hook
 async def agent_prompt_prefix(prefix: str, cat) -> str:
@@ -32,7 +34,8 @@ async def agent_prompt_suffix(suffix: str, cat) -> str:
 {{context}}
 """
 
-    language = settings["language"].value.lower()
+    # the stored settings hold the value of the enum (e.g. "English")
+    language = Languages(settings["language"]).value.lower()
     return f"""
 {suffix}
 ALWAYS answer in {"the user's language" if language == "human" else language}

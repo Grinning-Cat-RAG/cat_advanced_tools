@@ -34,12 +34,14 @@ You answer Human with a focus on the following context.
     def threshold_validator(cls, v):
         if v <= 0:
             raise ValueError("Memory threshold must be greater than 0")
+        return v
 
     @field_validator("latest_n_history")
     @classmethod
     def latest_n_history_validator(cls, v):
         if v < 1:
             raise ValueError("Latest `n` history threshold must be greater than 1")
+        return v
 
 
 @plugin
